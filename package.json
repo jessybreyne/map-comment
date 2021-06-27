@@ -1,0 +1,15 @@
+{
+  "name": "map-comment",
+  "version": "1.0.0",
+  "description": "Application d'une carte permettant de noter et commenter des endroits et d'en placer...",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "map",
+    "comment"
+  ],
+  "author": "Jessy BREYNE",
+  "license": "ISC"
+}
