@@ -11,11 +11,14 @@ const createToken = (id) => {
 }
 
 module.exports.signUp = async (req, res) => {
-    const { pseudo, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
+
+    // hash the password
+    let hash = await bcrypt.hashSync(password, 10);
 
     try {
-        const user = await UserModel.create({ pseudo, email, password });
-        res.status(201).json({ user: user._id });
+        let user_id = await db('user').insert({firstName, lastName, email, password: hash});
+        res.status(201).json({ user: user_id });
     }
     catch (err) {
         const errors = signUpErrors(err);
@@ -26,11 +29,13 @@ module.exports.signUp = async (req, res) => {
 module.exports.signIn = async (req, res) => {
     const { email, password } = req.body;
 
+    const user = await db('user').first('*').where({email})
+
     try {
-        const user = await UserModel.login(email, password);
-        const token = createToken(user._id);
+        const validPass = await bcrypt.compare(password, user.password)
+        const token = createToken(user.id);
         res.cookie('jwt', token, { httpOnly: true, maxAge })
-        res.status(200).json({user: user._id});
+        res.status(200).json({user: user.id});
     } catch (err) {
         const errors = signInErrors(err);
         res.status(200).send({ errors });
