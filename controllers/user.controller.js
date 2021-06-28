@@ -2,7 +2,7 @@ const UserModel = require('../models/user.model');
 
 module.exports.getAllUsers = async (req, res) => {
     // select all users without password
-    const users = await UserModel.find().select('-password');
+    let users = await db.select("id, firstName").from('users');
     res.status(200).json(users);
 }
 

@@ -17,7 +17,7 @@ module.exports.signUp = async (req, res) => {
     let hash = await bcrypt.hashSync(password, 10);
 
     try {
-        let user_id = await db('user').insert({firstName, lastName, email, password: hash});
+        let user_id = await db('users').insert({firstName, lastName, email, password: hash});
         res.status(201).json({ user: user_id });
     }
     catch (err) {
@@ -29,7 +29,7 @@ module.exports.signUp = async (req, res) => {
 module.exports.signIn = async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await db('user').first('*').where({email})
+    const user = await db('users').first('*').where({email})
 
     try {
         const validPass = await bcrypt.compare(password, user.password)
