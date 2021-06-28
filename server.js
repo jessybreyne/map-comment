@@ -25,6 +25,10 @@ app.get('/users', async (req, res) => {
   res.json(user);
 });
 
+// routes
+app.use('/api/user', userRoutes);
+
+// server
 app.listen(process.env.PORT, () => {
   console.log(`Listening on http://localhost:${process.env.PORT}`)
 })
