@@ -42,6 +42,13 @@ app.get('/jwtid', requireAuth, (req, res) => {
 // routes
 app.use('/api/user', userRoutes);
 
+app.get('*', (req, res) => {
+  console.log(res.locals);
+});
+app.get('*', (req, res) => {
+  console.log('Tu es connecté en tant que '+res.locals.user)
+});
+
 // server
 app.listen(process.env.PORT, () => {
   console.log(`Listening on http://localhost:${process.env.PORT}`);
