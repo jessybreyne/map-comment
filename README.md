@@ -4,6 +4,18 @@ Application pour placer des lieux sur une carte puis les commenter, les noter, e
 
 ## Installation
 
+Créer le .env
+
+```bash
+touch config/.env
+```
+
+Dans le .env
+```bash
+PORT=5000
+TOKEN_SECRET=test
+```
+
 Installation des dépendances JavaScript avec [npm](https://www.npmjs.com/)
 
 ```bash
