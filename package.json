@@ -2,7 +2,7 @@
   "name": "map-comment",
   "version": "1.0.0",
   "description": "Application d'une carte permettant de noter et commenter des endroits et d'en placer...",
-  "main": "server.js",
+  "main": "node server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,5 +11,12 @@
     "comment"
   ],
   "author": "Jessy BREYNE",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.95.6",
+    "sqlite3": "^5.0.2"
+  }
 }
