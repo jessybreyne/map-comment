@@ -14,6 +14,7 @@ const createToken = (id) => {
 
 module.exports.signUp = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
+    console.log(req.body)
 
     // hash the password
     let hash = await bcrypt.hashSync(password, 10);

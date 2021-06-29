@@ -4,8 +4,28 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/user.routes');
 const { checkUser, requireAuth } = require('./middleware/auth.middleware');
+// OpenAPI
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const app = express();
+
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Express API for JSONPlaceholder',
+    version: '1.0.0',
+  },
+};
+
+const options = {
+  swaggerDefinition,
+  // Paths to files containing OpenAPI definitions
+  apis: ['./routes/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -28,7 +48,18 @@ app.use(cookieParser());
 // Body parser
 app.use(express.urlencoded({ extended: false, limit: '20mb' }));
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 // Hello World!
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
 app.get('/', (req, res) => {
   res.send('Hello World!')
 });
@@ -41,13 +72,6 @@ app.get('/jwtid', requireAuth, (req, res) => {
 
 // routes
 app.use('/api/user', userRoutes);
-
-app.get('*', (req, res) => {
-  console.log(res.locals);
-});
-app.get('*', (req, res) => {
-  console.log('Tu es connecté en tant que '+res.locals.user)
-});
 
 // server
 app.listen(process.env.PORT, () => {
