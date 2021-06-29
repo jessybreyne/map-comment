@@ -26,7 +26,6 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
-
 const corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
@@ -48,21 +47,8 @@ app.use(cookieParser());
 // Body parser
 app.use(express.urlencoded({ extended: false, limit: '20mb' }));
 
+// UI OpenAPI
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// Hello World!
-/**
- * @openapi
- * /:
- *   get:
- *     description: Welcome to swagger-jsdoc!
- *     responses:
- *       200:
- *         description: Returns a mysterious string.
- */
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
 
 // jwt
 app.get('*', checkUser);

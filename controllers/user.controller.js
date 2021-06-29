@@ -2,9 +2,9 @@ const UserModel = require('../models/user.model');
 const db = require('../config/db');
 
 module.exports.getAllUsers = async (req, res) => {
-    if(res.locals.user) console.log('Tu es connecté en tant que '+res.locals.user[0].firstName)
+    if(res.locals.user) console.log('Tu es connecté en tant que '+res.locals.user[0].first_name)
     // select all users without password
-    let users = await db.select('id', 'firstName').from('users');
+    let users = await db.select('id', 'first_name').from('users');
     res.status(200).json(users);
 }
 

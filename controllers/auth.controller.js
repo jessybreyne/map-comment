@@ -13,14 +13,14 @@ const createToken = (id) => {
 }
 
 module.exports.signUp = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { first_name, last_name, email, password } = req.body;
     console.log(req.body)
 
     // hash the password
     let hash = await bcrypt.hashSync(password, 10);
 
     try {
-        let user_id = await db('users').insert({firstName, lastName, email, password: hash});
+        let user_id = await db('users').insert({first_name, last_name, email, password: hash});
         res.status(201).json({ user_id: user_id });
     }
     catch (err) {
