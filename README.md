@@ -33,6 +33,13 @@ Pour démarrer:
 npm start
 ```
 
+Pour démarrer la vue client:
+```bash
+cd client
+npm i
+npm start
+```
+
 ## Base de données
 
 Juste pour rappel, à ne pas faire pour installation
