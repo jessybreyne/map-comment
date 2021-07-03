@@ -2,7 +2,7 @@
 
 Application pour placer des lieux sur une carte puis les commenter, les noter, etc.
 
-## Fonctionnalités 
+## Fonctionnalités importantes 
 
 - [x] Inscritpion
 - [x] Connexion
@@ -13,6 +13,10 @@ Application pour placer des lieux sur une carte puis les commenter, les noter, e
 - [ ] Afficher la page d'un lieu
 - [ ] Ajouter une note à un lieu
 - [ ] Fonctionnalité pour définir si un lieu existe
+
+## Fonctionnalités secondaires 
+
+- [ ] Gestion de plusieurs langues
 
 ## Installation
 
