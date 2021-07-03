@@ -2,6 +2,18 @@
 
 Application pour placer des lieux sur une carte puis les commenter, les noter, etc.
 
+## Fonctionnalités 
+
+- [x] Inscritpion
+- [x] Connexion
+- [x] Affichage de la carte
+- [ ] Créer un lieu sur la carte 
+- [ ] Afficher les lieux sur la carte
+- [ ] Modifier son profil
+- [ ] Afficher la page d'un lieu
+- [ ] Ajouter une note à un lieu
+- [ ] Fonctionnalité pour définir si un lieu existe
+
 ## Installation
 
 Créer le .env
