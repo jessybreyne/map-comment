@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/user.routes');
+const locationRoutes = require('./routes/location.routes');
 const { checkUser, requireAuth } = require('./middleware/auth.middleware');
 // OpenAPI
 const swaggerJSDoc = require('swagger-jsdoc');
@@ -51,13 +52,15 @@ app.use(express.urlencoded({ extended: false, limit: '20mb' }));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // jwt
-app.get('*', checkUser);
-app.get('/jwtid', requireAuth, (req, res) => {
-    res.status(200).send(res.locals.user._id);
+app.all('*', checkUser);
+app.get('/jwtid', requireAuth, checkUser, (req, res) => {
+    console.log("user jwtid", res.locals.user)
+    res.status(200).json(res.locals.user.id);
 });
 
 // routes
 app.use('/api/user', userRoutes);
+app.use('/api/location', locationRoutes);
 
 // server
 app.listen(process.env.PORT, () => {

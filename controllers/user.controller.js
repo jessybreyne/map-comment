@@ -2,20 +2,16 @@ const UserModel = require('../models/user.model');
 const db = require('../config/db');
 
 module.exports.getAllUsers = async (req, res) => {
-    if(res.locals.user) console.log('Tu es connecté en tant que '+res.locals.user[0].first_name)
+    if(res.locals.user) console.log('Tu es connecté en tant que '+res.locals.user.first_name)
     // select all users without password
     let users = await db.select('id', 'first_name').from('users');
     res.status(200).json(users);
 }
 
-module.exports.userInfo = (req, res) => {
-    if (!ObjectID.isValid(req.params.id))
-        return res.status(400).send('ID unknow : ' + req.params.id);
-    
-    UserModel.findById(req.params.id, (err, docs) => {
-        if(!err) res.send(docs);
-        else console.log('ID unknow : ' + err);
-    }).select('-password');
+module.exports.userInfo = async (req, res) => {
+    let user = await db.select('id', 'first_name', 'last_name', 'email').from('users').where({id: req.params.id});
+    console.log(user[0]);
+    res.status(200).json(user[0]);
 };
 
 module.exports.updateUser = async (req, res) => {

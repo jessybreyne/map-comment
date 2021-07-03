@@ -13,7 +13,7 @@ module.exports.checkUser = (req, res, next) => {
             } else {
                 console.log("decoded token ", decodedToken);
                 let user = await db.select('*').from('users').where({id:decodedToken.id});
-                res.locals.user = user;
+                res.locals.user = user[0];
                 next();
             }
         })

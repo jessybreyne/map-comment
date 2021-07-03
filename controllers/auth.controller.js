@@ -39,10 +39,16 @@ module.exports.signIn = async (req, res) => {
     try {
         const validPass = await bcrypt.compare(password, user.password)
         console.log(validPass);
-        const token = createToken(user.id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge })
-        res.status(200).json({user: user.id});
+        if(validPass) {
+            const token = createToken(user.id);
+            res.cookie('jwt', token, { httpOnly: true, maxAge })
+            res.status(200).json({user: user.id});
+        } else {
+            const errors = signInErrors({ 'message': "password"});
+            res.status(200).send({ errors });
+        }
     } catch (err) {
+        console.log(err)
         const errors = signInErrors(err);
         res.status(200).send({ errors });
     }
